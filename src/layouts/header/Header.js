@@ -527,7 +527,7 @@ class Header extends React.Component {
                                               {this.ReadCartItems().map(
                                                 (CartItem, index) => (
                                                   <li className="ciya-mini-cart-item">
-                                                    <Link
+                                                    {/* <Link
                                                       onClick={() =>
                                                         this.removeFromCart(
                                                           index
@@ -537,7 +537,7 @@ class Header extends React.Component {
                                                       className="remove remove_from_cart_button"
                                                     >
                                                       ×
-                                                    </Link>
+                                                    </Link> */}
                                                     <div className="media">
                                                       <Link to="#">
                                                         <img
@@ -567,7 +567,8 @@ class Header extends React.Component {
                                                                 {
                                                                   minimumFractionDigits: 0,
                                                                 }
-                                                              )} */}{CartItem.Rate}
+                                                              )} */}
+                                                              {CartItem.Rate}
                                                             </span>
                                                           </span>
                                                         </span>
@@ -825,7 +826,6 @@ class Header extends React.Component {
                                         password: this.state.password,
                                       })
                                       .then((status) => {
-                                        console.log("this is callding me");
                                         if (status) {
                                           // window.location.reload();
                                           this.toggle();

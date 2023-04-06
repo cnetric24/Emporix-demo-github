@@ -21,7 +21,7 @@ export const addToCartItem = async (id, productID, allPrices) => {
     price: {
       priceId: allPrices[0]?.id,
       effectiveAmount: allPrices[0].salePrice?.discountAmount || 1,
-      originalAmount:allPrices[0] .tierValues[0]?.priceValue,
+      originalAmount: allPrices[0].tierValues[0]?.priceValue,
       currency: "USD",
     },
     quantity: 1,
@@ -113,7 +113,8 @@ export const placeOrder = async (params) => {
       .then((response) => {
         if (response.status == 200) {
           console.log("ORDER PLACED", response);
-          deleteCart();
+          // deleteCart();
+
           resolve(true);
         }
       })
@@ -123,6 +124,34 @@ export const placeOrder = async (params) => {
       })
       .finally();
   });
+};
+
+export const getCustomerCartagain = () => {
+  let data = {
+    customerId: LocalStorageService.getCustId(),
+    siteCode: "main",
+    type: "shopping",
+    channel: {
+      name: "storefront",
+      source: "https://your-storefront.com/",
+    },
+    currency: "USD",
+  };
+  return (dispatch) => {
+    post("createCart", data, true)
+      .then((response) => {
+        if (response.status == 201) {
+          dispatch({
+            type: "GET_CUSTOMER_CART",
+            cart: response.data.cartId,
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally();
+  };
 };
 
 export const getCartItems = () => {
@@ -174,7 +203,7 @@ export const getCartItems = () => {
   };
 };
 
-export const updateCartQty = (cartID,id,allPrices, qty) => {
+export const updateCartQty = (cartID, id, allPrices, qty) => {
   // let url = `/carts/${localStorage.getItem("MYID")}/items/${id}`;
   // let params = {
   //   data: {
@@ -186,15 +215,14 @@ export const updateCartQty = (cartID,id,allPrices, qty) => {
 
   var Cart = JSON.parse(localStorage.getItem("LocalCartItems"));
   let selectedProduct = Cart.find((product) => product.ProductID === id);
- 
-  
+
   let pricelist = [];
   allPrices.map((each, index) => {
     if (each.itemId.id === id) {
       pricelist.push(each);
     }
   });
- 
+
   let url = `updateCartItem/${cartID}/${selectedProduct.ItemId}`;
   let data = {
     itemYrn: `urn:yaas:saasag:caasproduct:product:cnetric;${id}`,
@@ -204,7 +232,7 @@ export const updateCartQty = (cartID,id,allPrices, qty) => {
       originalAmount: 2.75,
       currency: "USD",
     },
-    quantity:qty,
+    quantity: qty,
   };
 
   return (dispatch) => {
@@ -227,15 +255,14 @@ export const updateCartQty = (cartID,id,allPrices, qty) => {
 export const deleteCartItemsNew = async (id, allPrices, cartID) => {
   var Cart = JSON.parse(localStorage.getItem("LocalCartItems"));
   let selectedProduct = Cart.find((product) => product.ProductID === id);
- 
-  
+
   let pricelist = [];
   allPrices.map((each, index) => {
     if (each.itemId.id === id) {
       pricelist.push(each);
     }
   });
- 
+
   let url = `deleteCartItem/${cartID}/${selectedProduct.ItemId}`;
   let data = {
     itemYrn: `urn:yaas:saasag:caasproduct:product:cnetric;${id}`,

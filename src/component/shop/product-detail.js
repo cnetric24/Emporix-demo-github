@@ -19,6 +19,7 @@ import classnames from "classnames";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { post } from "../../api/APIController";
+import { toast } from "react-toastify";
 
 const relatedslider = {
   dots: false,
@@ -126,9 +127,13 @@ class ProductDetail extends Component {
       });
     }
   }
+
+  ErrorMessage() {
+    return toast.error("Please Login...");
+  }
   render() {
     const Productedit = this.state.CurrentProduct;
-    console.log("this is srikanth reddy",Productedit)
+    console.log("this is srikanth reddy", Productedit);
     return (
       <div>
         {Productedit !== null ? (
@@ -161,6 +166,7 @@ class ProductDetail extends Component {
                 <PostDetail
                   product={Productedit}
                   tabid={this.state.activeTab}
+                  ErrorMessage={this.ErrorMessage}
                 />
                 {/* <div className="product-content-bottom"> */}
 

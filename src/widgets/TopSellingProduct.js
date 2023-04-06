@@ -175,7 +175,7 @@ class TopSellingProduct extends Component {
                         <div className="product-action product-action-add-to-cart">
                           {!this.CheckCardItem(product.id) ? (
                             <Link
-                              onClick={() =>
+                              onClick={() => {if(this.props.customerID){
                                 this.AddToCart(
                                   product?.id,
                                   product?.name.en,
@@ -185,6 +185,12 @@ class TopSellingProduct extends Component {
                                   "In Stock",
                                   product?.id
                                 )
+                                
+                              }
+                            else{
+                              toast.error("Please Login...");
+                            }}
+                                
                               }
                               className="button add_to_cart_button"
                               rel="nofollow"

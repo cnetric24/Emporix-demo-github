@@ -393,6 +393,8 @@ class PostDetail extends Component {
                     {!this.CheckCardItem(product.id) ? (
                       <Link
                         onClick={() =>
+
+                          {if(this.props.customerID){
                           this.AddToCart(
                             product.id,
                             product.name.en,
@@ -402,6 +404,10 @@ class PostDetail extends Component {
                             "In Stock",
                             product.id
                           )
+                        }
+                        else{
+                          this.props.ErrorMessage()
+                        }}
                         }
                         className="button single_add_to_cart_button"
                         rel="nofollow"
@@ -668,6 +674,7 @@ const AppMapStateToProps = (state) => {
     products: state.data.products,
     allPrices: state?.price?.prices,
     cartID: state.cartId.cartId,
+    customerID: state?.user?.user?.customer_id,
   };
 };
 

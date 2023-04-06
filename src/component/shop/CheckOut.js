@@ -3,7 +3,7 @@
  */
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { placeOrder } from "../../actions/Cart";
+import { getCustomerCartagain, placeOrder } from "../../actions/Cart";
 import CommonList from "../../api/common";
 import GoogleMapReact from "google-map-react";
 
@@ -303,6 +303,7 @@ class CheckOut extends Component {
     this.setState({ orderProcess: true });
     placeOrder(this.getCheckoutParams()).then((response) => {
       console.log("CHECKOUT RESPOSE", response);
+      this.tests();
       if (response) {
         localStorage.setItem(
           "FinalCheckoutCartItems",
@@ -317,6 +318,10 @@ class CheckOut extends Component {
         this.setState({ orderProcess: false });
       }
     });
+  }
+
+  tests() {
+    this.props.getCustomerCartagain();
   }
 
   getCustomerInfo() {
@@ -401,22 +406,21 @@ class CheckOut extends Component {
         },
       ],
       addresses: [
-       
         {
-          contactName:  this.state.fieldvalue.firstname,
+          contactName: this.state.fieldvalue.firstname,
           street: this.state.fieldvalue.lastname,
           streetNumber: this.state.fieldvalue.companyname,
-          streetAppendix:this.state.fieldvalue.line_2,
+          streetAppendix: this.state.fieldvalue.line_2,
           zipCode: this.state.fieldvalue.postcode,
           city: this.state.fieldvalue.line_2,
           country: "GB",
           type: "SHIPPING",
         },
         {
-          contactName:  this.state.fieldvalue.firstname,
+          contactName: this.state.fieldvalue.firstname,
           street: this.state.fieldvalue.lastname,
           streetNumber: this.state.fieldvalue.companyname,
-          streetAppendix:this.state.fieldvalue.line_2,
+          streetAppendix: this.state.fieldvalue.line_2,
           zipCode: this.state.fieldvalue.postcode,
           city: this.state.fieldvalue.line_2,
           country: "GB",
@@ -424,13 +428,12 @@ class CheckOut extends Component {
         },
       ],
       customer: {
-        id:  this.props.user.customer_id,
-        title:  this.props.user.title,
-        firstName:  this.props.user.firstName,
-        lastName:  this.props.user.lastName,
+        id: this.props.user.customer_id,
+        title: this.props.user.title,
+        firstName: this.props.user.firstName,
+        lastName: this.props.user.lastName,
         contactPhone: this.props.user.contactPhone,
-        email: this.props.user.contactEmail
-        ,
+        email: this.props.user.contactEmail,
       },
     };
 
@@ -936,7 +939,7 @@ class CheckOut extends Component {
         <div class="shipping-fields__field-wrapper">
           <div class="form-group">
             <label for="shipping_first_name" class="">
-            Contact Name&nbsp;
+              Contact Name&nbsp;
               <abbr class="required" title="required">
                 *
               </abbr>
@@ -954,7 +957,7 @@ class CheckOut extends Component {
           </div>
           <div class="form-group">
             <label for="shipping_last_name" class="">
-            Street &nbsp;
+              Street &nbsp;
               <abbr class="required" title="required">
                 *
               </abbr>
@@ -973,7 +976,7 @@ class CheckOut extends Component {
 
           <div class="form-group">
             <label for="shipping_company" class="">
-            Street Number&nbsp;
+              Street Number&nbsp;
               {/* <span class="optional">(optional)</span> */}
             </label>
             <Input
@@ -988,7 +991,7 @@ class CheckOut extends Component {
           </div>
           <div class="form-group">
             <label for="shipping_company" class="">
-            Street Appendix&nbsp;
+              Street Appendix&nbsp;
               {/* <span class="optional">(optional)</span> */}
             </label>
             <Input
@@ -1003,7 +1006,7 @@ class CheckOut extends Component {
           </div>
           <div class="form-group">
             <label for="shipping_company" class="">
-            City&nbsp;
+              City&nbsp;
               {/* <span class="optional">(optional)</span> */}
             </label>
             <Input
@@ -1335,7 +1338,7 @@ class CheckOut extends Component {
                         <div class="billing-fields__field-wrapper">
                           <div class="form-group">
                             <label for="billing_first_name" class="">
-                            Contact Name&nbsp;
+                              Contact Name&nbsp;
                               <abbr class="required" title="required">
                                 *
                               </abbr>
@@ -1358,7 +1361,7 @@ class CheckOut extends Component {
                           </div>
                           <div class="form-group">
                             <label for="billing_last_name" class="">
-                            Street &nbsp;
+                              Street &nbsp;
                               <abbr class="required" title="required">
                                 *
                               </abbr>
@@ -1428,7 +1431,7 @@ class CheckOut extends Component {
 
                           <div class="form-group">
                             <label for="billing_company" class="">
-                            Street Number &nbsp;
+                              Street Number &nbsp;
                               {/* <span class="optional">(optional)</span> */}
                             </label>
                             <Input
@@ -1446,7 +1449,7 @@ class CheckOut extends Component {
                           </div>
                           <div class="form-group">
                             <label for="line_1" class="">
-                            Street Appendix &nbsp;
+                              Street Appendix &nbsp;
                               {/* <span class="optional">(optional)</span> */}
                             </label>
                             <Input
@@ -1461,7 +1464,7 @@ class CheckOut extends Component {
                           </div>
                           <div class="form-group">
                             <label for="line_2" class="">
-                            City &nbsp;
+                              City &nbsp;
                               {/* <span class="optional">(optional)</span> */}
                             </label>
                             <Input
@@ -1819,13 +1822,14 @@ const mapStateToProps = (state) => {
   return {
     dealerList: state.dealer.dealer || [],
     user: state.user.user,
-    cartID: state.cartId.cartId
+    cartID: state.cartId.cartId,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
+      getCustomerCartagain,
       getDealer,
       getCartItems,
     },

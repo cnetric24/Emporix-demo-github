@@ -4,12 +4,14 @@ import store from "../../Store";
 import { getCartItems } from "../Cart";
 import { extractCustomerID } from "../../utilities/common";
 import LocalStorageService from "../../storage/LocalStorageService";
+import { toast } from "react-toastify";
 export const loginCustomer = (params) => {
   return (dispatch) => {
     return new Promise((resolve, reject) => {
       return post(`login`, params)
         .then((response) => {
           console.log("Login ", response);
+
           if (response.status === 200) {
             if (
               response.data["status"] !== undefined &&
@@ -19,6 +21,7 @@ export const loginCustomer = (params) => {
               return;
             }
           }
+
           // const foundCustomerId = extractCustomerID(response.data?.scope)
           LocalStorageService.setUserToken(response.data?.accessToken);
           LocalStorageService.setSaasToken(response.data?.saasToken);
@@ -95,6 +98,7 @@ export const loginCustomer = (params) => {
           }
         })
         .catch((error) => {
+          toast.error("Please enter valid email,password");
           console.log("Login error", error);
           return true;
         })

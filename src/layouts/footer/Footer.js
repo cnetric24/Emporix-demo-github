@@ -223,8 +223,8 @@ class Footer extends React.Component {
                             <li>
                               <i className="fa fa-map-marker" />
                               <span>
-                                8-2-337, Road No. 3,Banjara Hills, Hyderabad,
-                                Telangana 500034, INDIA
+                                8-2-337, Road No. 3,Jaya Nagar, Bangalore,
+                                Karnataka 600034, INDIA
                               </span>
                             </li>
                             <li className="pgs-contact-email">

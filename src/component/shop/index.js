@@ -142,6 +142,7 @@ class ShopPage extends Component {
                             layoutstyle={layoutstyle}
                             prices={this.props.allPrices}
                             cartID={this.props.cartID}
+                            customerID={this.props.customerID}
                           />
                         ))}
                     </Row>
@@ -187,5 +188,6 @@ const mapDispatchToProps = (state) => ({
   products: state.data.products,
   allPrices: state?.price?.prices,
   cartID: state.cartId.cartId,
+  customerID: state?.user?.user?.customer_id,
 });
 export default connect(mapDispatchToProps, {})(ShopPage);
