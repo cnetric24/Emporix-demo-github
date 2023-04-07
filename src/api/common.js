@@ -18,7 +18,7 @@ export default [
       phone: "5685486123",
     },
     billingaddress: {
-      billingname: "Nova",
+      billingname: "Emporix",
       address: "4402 Worthington Drive",
       streetno: "Richardson",
       state: "Near Sherwood Mall",
@@ -26,7 +26,7 @@ export default [
       country: "USA",
     },
     shippingaddress: {
-      shippingname: "Nova",
+      shippingname: "Emporix",
       address: "4402 Worthington Drive",
       streetno: "Richardson",
       state: "Near Sherwood Mall",
