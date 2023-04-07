@@ -257,7 +257,8 @@ class PostDetail extends Component {
 
     this.props.allPrices.map((each, index) => {
       if (each.itemId.id === id) {
-        price = each.salePrice.discountAmount;
+        price =
+          each?.tierValues[0]?.priceValue - each?.salePrice?.discountAmount;
       }
     });
     return price;
@@ -392,23 +393,21 @@ class PostDetail extends Component {
                     </div>
                     {!this.CheckCardItem(product.id) ? (
                       <Link
-                        onClick={() =>
-
-                          {if(this.props.customerID){
-                          this.AddToCart(
-                            product.id,
-                            product.name.en,
-                            product.media[0].url,
-                            1,
-                            this.getProductPrice(product.id),
-                            "In Stock",
-                            product.id
-                          )
-                        }
-                        else{
-                          this.props.ErrorMessage()
+                        onClick={() => {
+                          if (this.props.customerID) {
+                            this.AddToCart(
+                              product.id,
+                              product.name.en,
+                              product.media[0].url,
+                              1,
+                              this.getProductPrice(product.id),
+                              "In Stock",
+                              product.id
+                            );
+                          } else {
+                            this.props.ErrorMessage();
+                          }
                         }}
-                        }
                         className="button single_add_to_cart_button"
                         rel="nofollow"
                       >
