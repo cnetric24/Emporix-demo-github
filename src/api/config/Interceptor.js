@@ -6,9 +6,9 @@ import qs from "qs";
 const localStorageService = LocalStorageService.getService();
 
 // Set config defaults when creating the instance
-const instance = axios.create({
-  baseURL: "http://13.126.66.2:1899",
-});
+// const instance = axios.create({
+//   baseURL: "http://13.126.66.2:1899",
+// });
 
 // Add a request interceptor
 

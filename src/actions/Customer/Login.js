@@ -98,8 +98,8 @@ export const loginCustomer = (params) => {
           }
         })
         .catch((error) => {
-          toast.error("Please enter valid email,password");
-          console.log("Login error", error);
+          // toast.error("Please enter valid email,password");
+          // console.log("Login error", error);
           return true;
         })
         .finally();
