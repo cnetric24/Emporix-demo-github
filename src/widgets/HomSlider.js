@@ -14,6 +14,29 @@ const settings = {
   speed: 500,
   slidesToShow: 1,
   slidesToScroll: 1,
+  responsive: [
+    {
+      breakpoint: 991,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      },
+    },
+    {
+      breakpoint: 767,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      },
+    },
+    {
+      breakpoint: 575,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      },
+    },
+  ]
 };
 // const banners = [
 //   {
@@ -78,7 +101,7 @@ class HomSlider extends Component {
             <div key={2} className="slide-01-item">
               <div className="slide-inner">
                 <div className="slide-image">
-                  <img src={`${info?.url}`} alt="slide-1" />
+                  <img src={`${info?.url}`} alt="slide-1" width={1920}/>
                 </div>
                 <div className="slide-content">
                   <div class="container">
