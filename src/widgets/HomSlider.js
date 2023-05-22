@@ -15,21 +15,21 @@ const settings = {
   slidesToShow: 1,
   slidesToScroll: 1,
 };
-const banners = [
-  {
-    id: "1",
-    url: "https://images.ctfassets.net/gqlaeh1nu6o2/4LiT4yLEqGAnn3ucXDOzyq/09fa8aa55df848b1f7aa616d6b7657c6/photo-5b.jpg",
-  },
-  {
-    id: "2",
-    url: "https://images.ctfassets.net/gqlaeh1nu6o2/3TnFbh2FaUiMVjDhH6QWto/ceac3bfd88d5f74d257458c87dd59976/Women-s_Jacket.jpg",
-  },
-];
+// const banners = [
+//   {
+//     id: "1",
+//     url: "https://images.ctfassets.net/gqlaeh1nu6o2/4LiT4yLEqGAnn3ucXDOzyq/09fa8aa55df848b1f7aa616d6b7657c6/photo-5b.jpg",
+//   },
+//   {
+//     id: "2",
+//     url: "https://images.ctfassets.net/gqlaeh1nu6o2/3TnFbh2FaUiMVjDhH6QWto/ceac3bfd88d5f74d257458c87dd59976/Women-s_Jacket.jpg",
+//   },
+// ];
 
 class HomSlider extends Component {
   constructor(props) {
     super(props);
-    // getContent();
+     getContent();
   }
   render() {
     return (
@@ -73,12 +73,12 @@ class HomSlider extends Component {
           </div>
         </div> */}
 
-        {banners.map((info) => {
+        {this.props.slider?.map((info) => {
           return (
             <div key={2} className="slide-01-item">
               <div className="slide-inner">
                 <div className="slide-image">
-                  <img src={`${info.url}`} alt="slide-1" />
+                  <img src={`${info?.url}`} alt="slide-1" />
                 </div>
                 <div className="slide-content">
                   <div class="container">
