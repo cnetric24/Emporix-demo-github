@@ -1,5 +1,5 @@
 import { get } from "../../../api/APIController";
-import { post } from "../../../api/APIControllerTest";
+// import { post } from "../../../api/APIControllerTest";
 import store from "../../../Store";
 export const getContent = () => {
   get("getBanners")
