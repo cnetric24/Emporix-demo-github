@@ -96,7 +96,7 @@ export const checkout111111 = () => {
     )
     .then((result) => {
       if (result) {
-        console.log("stripe responce", result.url);
+        // console.log("stripe responce", result.url);
         localStorage.removeItem("LocalCartItems");
          window.location.replace(result.url)
       }
