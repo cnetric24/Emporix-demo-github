@@ -52,6 +52,9 @@ import { getCategory } from "./actions/Category";
 import { connect } from "react-redux";
 import { uuidv4 } from "./helper";
 import { getPrices } from "./actions/Prices";
+import { checkout111111, getStrip } from "./actions/Home/Slider";
+import Success from "./component/Account/Success";
+
 
 class App extends React.Component {
   constructor(props) {
@@ -65,6 +68,9 @@ class App extends React.Component {
     this.props.getCategory();
     //  this.props.receiveProducts();
     this.props.getPrices();
+  //  getStrip()
+    //  checkout111111()
+    // Checkoutq()
   }
   getUrl(pathname) {
     let pathArray = pathname.split("/");
@@ -172,6 +178,7 @@ class App extends React.Component {
                   component={SavedCardsadd}
                 />
                 <Route exact path="/SuccessScreen" component={SuccessScreen} />
+                <Route exact path="/Success" component={Success} />
                 <Route exact path="/Reports" component={Reports} />
                 <Route exact path="/Invoices" component={Invoices} />
                 <Route path={`/shop/:id`} component={ProductDetail} />

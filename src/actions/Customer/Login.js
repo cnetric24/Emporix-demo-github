@@ -30,6 +30,8 @@ export const loginCustomer = (params) => {
             .then((response) => {
               if (response.status === 200) {
                 LocalStorageService.setCustId(response.data?.id);
+                LocalStorageService.setCustEmail(response.data?.contactEmail
+                  );
                 let data = {
                   customerId: response.data?.id,
                   siteCode: "main",

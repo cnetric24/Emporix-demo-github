@@ -21,6 +21,7 @@ class TopSellingProduct extends Component {
 
   AddToCart(ProductID, ProductName, ProductImage, Qty, Rate, StockStatus, Sku) {
     var Cart = JSON.parse(localStorage.getItem("LocalCartItems"));
+    
     if (Cart == null) Cart = new Array();
     let selectedProduct = Cart.find(
       (product) => product.ProductID === ProductID
@@ -52,6 +53,7 @@ class TopSellingProduct extends Component {
     } else {
       toast.warning("Item is already in Cart");
     }
+    console.log("this is stipe",Cart)
   }
 
   AddToWishList(

@@ -39,6 +39,7 @@ import { bindActionCreators } from "redux";
 import { toast } from "react-toastify";
 import "react-credit-cards/es/styles-compiled.css";
 import Cards from "react-credit-cards";
+import { checkout111111 } from "../../actions/Home/Slider";
 const LocationPin = ({ text }) => (
   <div className="pin">
     <Icon
@@ -300,6 +301,7 @@ class CheckOut extends Component {
 
   placeOrderCall() {
     console.log("getCheckoutParams", this.getCheckoutParams());
+    checkout111111()
     this.setState({ orderProcess: true });
     placeOrder(this.getCheckoutParams()).then((response) => {
       console.log("CHECKOUT RESPOSE", response);
@@ -311,7 +313,7 @@ class CheckOut extends Component {
         );
         this.setState({ paymentModal: false });
         localStorage.removeItem("LocalCartItems");
-        this.props.history.push(`/SuccessScreen`);
+        // this.props.history.push(`/SuccessScreen`);
         this.setState({ orderProcess: false });
       } else {
         alert("Please try again");
@@ -1161,137 +1163,138 @@ class CheckOut extends Component {
 
   _renderPaymentCardModel() {
     return (
-      <Modal
-        className="modal-login modal-dialog-centered"
-        isOpen={this.state.paymentModal}
-        toggle={this.toggle}
-        onKeyDown={(event) => {
-          this.setState({ modal: false });
-        }}
-        // className="modal-login"
-      >
-        <ModalHeader
-          style={{ display: "block", padding: 12 }}
-          toggle={this.toggle}
-        >
-          <Row className="align-items-center mt-1">
-            <Col md={8} className="text-left">
-              <h1>Payment</h1>
-            </Col>
-            <Col md={4} className="text-right">
-              <button
-                style={{ backgroundColor: "transparent" }}
-                type="submit"
-                class="button alt"
-                name="checkout_pay"
-                id="place_order"
-                value="pay"
-                data-value="pay"
-                onClick={() => {
-                  this.setState({ paymentModal: false });
-                }}
-              >
-                <Icon icon={closeIcon} />
-              </button>
-            </Col>
-          </Row>
-        </ModalHeader>
-        <ModalBody>
-          <div md={6} className="intro-title align-items-center">
-            <div id="PaymentForm">
-              <Cards
-                cvc={this.state.cvc}
-                expiry={this.state.expiry}
-                focused={this.state.focus}
-                name={this.state.name}
-                number={this.state.number}
-              />
-              <form>
-                <Col md={12} className="text-center">
-                  <Row className="align-items-center mt-4">
-                    <input
-                      class="form-control "
-                      type="tel"
-                      name="number"
-                      placeholder="Card Number"
-                      onChange={this.handleInputChange}
-                      onFocus={this.handleInputFocus}
-                    />
-                  </Row>
-                  <Row className="align-items-center mt-2">
-                    <input
-                      class="form-control "
-                      type=""
-                      name="name"
-                      placeholder="Name"
-                      onChange={this.handleInputChange}
-                      onFocus={this.handleInputFocus}
-                    />
-                  </Row>
-                  <Row className="mt-2">
-                    <div
-                      style={{ padding: "0px", paddingRigth: "6px" }}
-                      className="text-left col-md-6"
-                    >
-                      <input
-                        type="tel"
-                        class="form-control "
-                        name="expiry"
-                        placeholder="Expiry Date"
-                        onChange={this.handleInputChange}
-                        onFocus={this.handleInputFocus}
-                      />
-                    </div>
-                    <div
-                      style={{ padding: "0px", paddingLeft: "6px" }}
-                      className="text-left col-md-6"
-                    >
-                      <input
-                        type="tel"
-                        name="cvc"
-                        class="form-control "
-                        placeholder="CVC"
-                        onChange={this.handleInputChange}
-                        onFocus={this.handleInputFocus}
-                      />
-                    </div>
-                  </Row>
-                  <Row className="mt-2 text-center">
-                    <div className="mt-2">
-                      <Button
-                        style={{
-                          "vertical-align": "middle",
-                          float: "left",
-                          padding: "9px 20px",
-                          position: "relative",
-                          border: "none",
-                          "font-size": "14px",
-                          background: "#5224B5",
-                          color: "#fff",
-                          "line-height": "26px",
-                          "text-transform": "uppercase",
-                          "border-radius": "3px",
-                          "font-weight": "400",
-                          cursor: "pointer",
-                          display: "inline-block",
-                          "font-family": "inherit",
-                        }}
-                        onClick={() => {
-                          if (!this.state.orderProcess) {
-                            return this.placeOrderCall();
-                          }
-                        }}
-                      >
-                        {this.state.orderProcess ? "Order Placing..." : "Pay"}
-                      </Button>
-                    </div>
-                  </Row>
-                </Col>
-              </form>
-            </div>
-          </div>
-        </ModalBody>
-      </Modal>
+      // <Modal
+      //   className="modal-login modal-dialog-centered"
+      //   isOpen={this.state.paymentModal}
+      //   toggle={this.toggle}
+      //   onKeyDown={(event) => {
+      //     this.setState({ modal: false });
+      //   }}
+      //   // className="modal-login"
+      // >
+      //   <ModalHeader
+      //     style={{ display: "block", padding: 12 }}
+      //     toggle={this.toggle}
+      //   >
+      //     <Row className="align-items-center mt-1">
+      //       <Col md={8} className="text-left">
+      //         <h1>Payment</h1>
+      //       </Col>
+      //       <Col md={4} className="text-right">
+      //         <button
+      //           style={{ backgroundColor: "transparent" }}
+      //           type="submit"
+      //           class="button alt"
+      //           name="checkout_pay"
+      //           id="place_order"
+      //           value="pay"
+      //           data-value="pay"
+      //           onClick={() => {
+      //             this.setState({ paymentModal: false });
+      //           }}
+      //         >
+      //           <Icon icon={closeIcon} />
+      //         </button>
+      //       </Col>
+      //     </Row>
+      //   </ModalHeader>
+      //   <ModalBody>
+      //     <div md={6} className="intro-title align-items-center">
+      //       <div id="PaymentForm">
+      //         <Cards
+      //           cvc={this.state.cvc}
+      //           expiry={this.state.expiry}
+      //           focused={this.state.focus}
+      //           name={this.state.name}
+      //           number={this.state.number}
+      //         />
+      //         <form>
+      //           <Col md={12} className="text-center">
+      //             <Row className="align-items-center mt-4">
+      //               <input
+      //                 class="form-control "
+      //                 type="tel"
+      //                 name="number"
+      //                 placeholder="Card Number"
+      //                 onChange={this.handleInputChange}
+      //                 onFocus={this.handleInputFocus}
+      //               />
+      //             </Row>
+      //             <Row className="align-items-center mt-2">
+      //               <input
+      //                 class="form-control "
+      //                 type=""
+      //                 name="name"
+      //                 placeholder="Name"
+      //                 onChange={this.handleInputChange}
+      //                 onFocus={this.handleInputFocus}
+      //               />
+      //             </Row>
+      //             <Row className="mt-2">
+      //               <div
+      //                 style={{ padding: "0px", paddingRigth: "6px" }}
+      //                 className="text-left col-md-6"
+      //               >
+      //                 <input
+      //                   type="tel"
+      //                   class="form-control "
+      //                   name="expiry"
+      //                   placeholder="Expiry Date"
+      //                   onChange={this.handleInputChange}
+      //                   onFocus={this.handleInputFocus}
+      //                 />
+      //               </div>
+      //               <div
+      //                 style={{ padding: "0px", paddingLeft: "6px" }}
+      //                 className="text-left col-md-6"
+      //               >
+      //                 <input
+      //                   type="tel"
+      //                   name="cvc"
+      //                   class="form-control "
+      //                   placeholder="CVC"
+      //                   onChange={this.handleInputChange}
+      //                   onFocus={this.handleInputFocus}
+      //                 />
+      //               </div>
+      //             </Row>
+      //             <Row className="mt-2 text-center">
+      //               <div className="mt-2">
+      //                 <Button
+      //                   style={{
+      //                     "vertical-align": "middle",
+      //                     float: "left",
+      //                     padding: "9px 20px",
+      //                     position: "relative",
+      //                     border: "none",
+      //                     "font-size": "14px",
+      //                     background: "#5224B5",
+      //                     color: "#fff",
+      //                     "line-height": "26px",
+      //                     "text-transform": "uppercase",
+      //                     "border-radius": "3px",
+      //                     "font-weight": "400",
+      //                     cursor: "pointer",
+      //                     display: "inline-block",
+      //                     "font-family": "inherit",
+      //                   }}
+      //                   onClick={() => {
+      //                     if (!this.state.orderProcess) {
+      //                       return this.placeOrderCall();
+      //                     }
+      //                   }}
+      //                 >
+      //                   {this.state.orderProcess ? "Order Placing..." : "Pay"}
+      //                 </Button>
+      //               </div>
+      //             </Row>
+      //           </Col>
+      //         </form>
+      //       </div>
+      //     </div>
+      //   </ModalBody>
+      // </Modal>
+      <></>
     );
   }
 
@@ -1800,6 +1803,11 @@ class CheckOut extends Component {
                           value="Place order"
                           data-value="Place order"
                           disabled={this.state.orderProcess}
+                          onClick={() => {
+                            if (!this.state.orderProcess) {
+                              return this.placeOrderCall();
+                            }
+                          }}
                         >
                           {this.state.orderProcess
                             ? "Order Placing...."

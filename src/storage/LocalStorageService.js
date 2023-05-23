@@ -35,12 +35,21 @@ const LocalStorageService = (function () {
   function _getCustId() {
     return localStorage.getItem("custId");
   }
+  
+  function _setCustEmail(tokenObj) {
+    localStorage.setItem("custEmail", tokenObj);
+  }
+  function _getCustEmail() {
+    return localStorage.getItem("custEmail");
+  }
+
   function _clearToken() {
     localStorage.removeItem("access_token");
     localStorage.removeItem("refresh_token");
     localStorage.removeItem("user_token");
     localStorage.removeItem("sass_token");
     localStorage.removeItem("custId");
+    localStorage.removeItem("custEmail");
   }
   return {
     getService: _getService,
@@ -53,7 +62,9 @@ const LocalStorageService = (function () {
     setSaasToken:_setSaasToken,
     getSaasToken:_getSaasToken,
     setCustId:_setCustId,
-    getCustId:_getCustId
+    getCustId:_getCustId,
+    setCustEmail:_setCustEmail,
+    getCustEmail:_getCustEmail
   };
 })();
 export default LocalStorageService;

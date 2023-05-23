@@ -1,5 +1,6 @@
 import { get } from "../../../api/APIController";
-// import { post } from "../../../api/APIControllerTest";
+import LocalStorageService from "../../../storage/LocalStorageService";
+
 import store from "../../../Store";
 export const getContent = () => {
   get("getBanners")
@@ -16,70 +17,159 @@ export const getContent = () => {
     .finally();
 };
 
-// export const getStrip = () => {
-//   let data = {
-//     cancel_url: "https://example.com/cancel",
-//     success_url: "http://emporixdemo.universalcommerce.io:3020",
-//     customer_email: "test@gmail.com",
-//     "line_items[0][price_data][currency]": "usd",
-//     "line_items[0][price_data][product_data][name]": "Shoes",
-//     "line_items[0][price_data][product_data][description]": "Shoes for men",
-//     "line_items[0][price_data][product_data][images][0]":
-//       "https://res.cloudinary.com/saas-ag/image/upload/v1674124355/cnetric/products/9b525aa1-4f20-4354-b9cd-d2c6c0ff1366.jpg",
-//     "line_items[0][price_data][unit_amount]": "2200",
-//     "line_items[0][quantity]": "1",
-//     mode: "payment",
-//     "payment_method_types[0]": "card",
-//     "shipping_options[0][shipping_rate_data][display_name]": "BlueDart",
-//     "shipping_options[0][shipping_rate_data][fixed_amount][amount]": "1000",
-//     "shipping_options[0][shipping_rate_data][fixed_amount][currency]": "usd",
-//     "shipping_options[0][shipping_rate_data][type]": "fixed_amount",
-//   };
-//   let data1 = {
-//    success_url: "https://emporixdemo.universalcommerce.io:3020",
-//     cancel_url: "https://example.com/cancel",
+export const checkout111111 = () => {
+  const custEmail = LocalStorageService.getCustEmail();
+  var Cart = JSON.parse(localStorage.getItem("LocalCartItems"));
+  console.log("this is stripe api testing", Cart);
 
-//     customer_email: "test@gmail.com",
-//     mode: "payment",
-//     line_items: [
-//       [
-//         {
-//           price_data: {
-//             currency: "usd",
-//             unit_amount: "2200",
-//             product_data: {
-//               name: "Shoes",
-//               description: "Shoes for me",
-//               images: [
-//                 "https://res.cloudinary.com/saas-ag/image/upload/v1674124355/cnetric/products/9b525aa1-4f20-4354-b9cd-d2c6c0ff1366.jpg",
-//               ],
-//             },
-//           },
-//           quantity: "1",
-//         },
-//       ],
-//     ],
-//     shipping_options: [
-//       {
-//         shipping_rate_data: {
-//           display_name: "BlueDart",
+  var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+  myHeaders.append(
+    "Authorization",
+    "Bearer sk_test_51LueYMSJR3MKnRF3268B3qx0LDEK9geJ451EKxtEhljfXbYBJMLaeb1DqV0vqUo9IeVDIaGx4xIjRRX2IrAXjNqQ00Kg4KMZdq"
+  );
 
-//           fixed_amount: {
-//             amount: "1000",
-//             currency: "usd",
-//           },
-//           type: "fixed_amount",
-//         },
-//       },
-//     ],
-//   };
+  var urlencoded = new URLSearchParams();
+  urlencoded.append("cancel_url", "http://emporixdemo.universalcommerce.io:3020/Error");
+  urlencoded.append(
+    "success_url",
+    "http://emporixdemo.universalcommerce.io:3020/Success"
+  );
+  urlencoded.append("customer_email", custEmail);
+  urlencoded.append("line_items[0][price_data][currency]", "usd");
+  urlencoded.append(
+    "line_items[0][price_data][product_data][name]",
+    Cart[0].ProductName
+  );
+  urlencoded.append(
+    "line_items[0][price_data][product_data][description]",
+    Cart[0].ProductName
+  );
+  urlencoded.append(
+    "line_items[0][price_data][product_data][images][0]",
+    Cart[0].ProductImage
+  );
+  urlencoded.append("line_items[0][price_data][unit_amount]", "0.75");
+  urlencoded.append("line_items[0][quantity]", "1");
+  // urlencoded.append("line_items[1][price_data][currency]", "usd");
+  // urlencoded.append("line_items[1][price_data][product_data][name]", "Pant");
+  // urlencoded.append(
+  //   "line_items[1][price_data][product_data][description]",
+  //   "Pant for gents"
+  // );
+  // urlencoded.append(
+  //   "line_items[1][price_data][product_data][images][0]",
+  //   "https://res.cloudinary.com/saas-ag/image/upload/v1674124328/cnetric/products/7c71cca9-e53e-4171-a181-271862e96d8c.jpg"
+  // );
+  // urlencoded.append("line_items[1][price_data][unit_amount]", "2400");
+  // urlencoded.append("line_items[1][quantity]", "3");
+  urlencoded.append("mode", "payment");
+  urlencoded.append("payment_method_types[0]", "card");
+  urlencoded.append(
+    "shipping_options[0][shipping_rate_data][display_name]",
+    "BlueDart"
+  );
+  urlencoded.append(
+    "shipping_options[0][shipping_rate_data][fixed_amount][amount]",
+    "1000"
+  );
+  urlencoded.append(
+    "shipping_options[0][shipping_rate_data][fixed_amount][currency]",
+    "usd"
+  );
+  urlencoded.append(
+    "shipping_options[0][shipping_rate_data][type]",
+    "fixed_amount"
+  );
 
-//   post("v1/checkout/sessions", data1, true)
-//     .then((response) => {
-//       if (response.status == 200) {
-//         console.log("stripe", response);
-//       }
-//     })
-//     .catch((error) => {})
-//     .finally();
+  var requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: urlencoded,
+    redirect: "follow",
+  };
+
+  fetch("https://api.stripe.com/v1/checkout/sessions", requestOptions)
+    .then((response) => 
+    // response.text()
+    response.json()
+    )
+    .then((result) => {
+      if (result) {
+        console.log("stripe responce", result.url);
+        localStorage.removeItem("LocalCartItems");
+         window.location.replace(result.url)
+      }
+    })
+    .catch((error) => console.log("error", error));
+};
+
+// var myHeaders = new Headers();
+// myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+// myHeaders.append(
+//   "Authorization",
+//   "Bearer sk_test_51LueYMSJR3MKnRF3268B3qx0LDEK9geJ451EKxtEhljfXbYBJMLaeb1DqV0vqUo9IeVDIaGx4xIjRRX2IrAXjNqQ00Kg4KMZdq"
+// );
+
+// var urlencoded = new URLSearchParams();
+// urlencoded.append("cancel_url", "https://example.com/cancel");
+// urlencoded.append(
+//   "success_url",
+//   "http://emporixdemo.universalcommerce.io:3020/SuccessScreen"
+// );
+// urlencoded.append("customer_email", "test@gmail.com");
+// urlencoded.append("line_items[0][price_data][currency]", "usd");
+// urlencoded.append("line_items[0][price_data][product_data][name]", "Shoes");
+// urlencoded.append(
+//   "line_items[0][price_data][product_data][description]",
+//   "Shoes for men"
+// );
+// urlencoded.append(
+//   "line_items[0][price_data][product_data][images][0]",
+//   "https://res.cloudinary.com/saas-ag/image/upload/v1674124355/cnetric/products/9b525aa1-4f20-4354-b9cd-d2c6c0ff1366.jpg"
+// );
+// urlencoded.append("line_items[0][price_data][unit_amount]", "2200");
+// urlencoded.append("line_items[0][quantity]", "1");
+// urlencoded.append("line_items[1][price_data][currency]", "usd");
+// urlencoded.append("line_items[1][price_data][product_data][name]", "Pant");
+// urlencoded.append(
+//   "line_items[1][price_data][product_data][description]",
+//   "Pant for gents"
+// );
+// urlencoded.append(
+//   "line_items[1][price_data][product_data][images][0]",
+//   "https://res.cloudinary.com/saas-ag/image/upload/v1674124328/cnetric/products/7c71cca9-e53e-4171-a181-271862e96d8c.jpg"
+// );
+// urlencoded.append("line_items[1][price_data][unit_amount]", "2400");
+// urlencoded.append("line_items[1][quantity]", "3");
+// urlencoded.append("mode", "payment");
+// urlencoded.append("payment_method_types[0]", "card");
+// urlencoded.append(
+//   "shipping_options[0][shipping_rate_data][display_name]",
+//   "BlueDart"
+// );
+// urlencoded.append(
+//   "shipping_options[0][shipping_rate_data][fixed_amount][amount]",
+//   "1000"
+// );
+// urlencoded.append(
+//   "shipping_options[0][shipping_rate_data][fixed_amount][currency]",
+//   "usd"
+// );
+// urlencoded.append(
+//   "shipping_options[0][shipping_rate_data][type]",
+//   "fixed_amount"
+// );
+
+// var requestOptions = {
+//   method: "POST",
+//   headers: myHeaders,
+//   body: urlencoded,
+//   redirect: "follow",
 // };
+
+// fetch("https://api.stripe.com/v1/checkout/sessions", requestOptions)
+//   .then((response) => response.text())
+//   .then((result) =>   window.location.replace(result.url)
+//   )
+//   .catch((error) => console.log("error", error));
