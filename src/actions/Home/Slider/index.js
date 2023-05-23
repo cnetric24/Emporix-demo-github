@@ -71,7 +71,7 @@ export const checkout111111 = () => {
   );
   urlencoded.append(
     "shipping_options[0][shipping_rate_data][fixed_amount][amount]",
-    "50"
+    "1000"
   );
   urlencoded.append(
     "shipping_options[0][shipping_rate_data][fixed_amount][currency]",
