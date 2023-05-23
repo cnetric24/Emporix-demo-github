@@ -49,7 +49,7 @@ export const checkout111111 = () => {
     "line_items[0][price_data][product_data][images][0]",
     Cart[0].ProductImage
   );
-  urlencoded.append("line_items[0][price_data][unit_amount]", "0.75");
+  urlencoded.append("line_items[0][price_data][unit_amount]", "1");
   urlencoded.append("line_items[0][quantity]", "1");
   // urlencoded.append("line_items[1][price_data][currency]", "usd");
   // urlencoded.append("line_items[1][price_data][product_data][name]", "Pant");
