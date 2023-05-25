@@ -8,6 +8,7 @@ import { Col, Container, Row } from "reactstrap";
 class Success extends Component {
   render() {
     const date = new Date();
+    
 
     return (
       <div>
@@ -53,7 +54,8 @@ class Success extends Component {
                     <h2 className="mb-0 mt-2">
                       {" "}
                       {date.toLocaleString("en-us", { month: "long" })}{" "}
-                      {new Date().getDay() + 2}, {new Date().getFullYear()}{" "}
+                      {/* {new Date().getDate()} */} 30
+                      , {new Date().getFullYear()}{" "}
                     </h2>
                   </div>
 
