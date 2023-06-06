@@ -63,14 +63,14 @@ export const getFilterProductsdata = (data, { category, size, color,value, sortO
         }
 
         let searchMatchValue;
-        if(product.name.en) {
+        if(product.code) {
             if(search == search.toLowerCase())
             {
-                searchMatchValue=product.name.en.toLowerCase().indexOf(search.toLowerCase()) > -1
+                searchMatchValue=product.code.toLowerCase().indexOf(search.toLowerCase()) > -1
             }
             else
             {
-                searchMatchValue=product.name.en.toUpperCase().indexOf(search.toUpperCase()) > -1
+                searchMatchValue=product.code.toUpperCase().indexOf(search.toUpperCase()) > -1
             }
         }
         else

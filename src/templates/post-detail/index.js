@@ -40,7 +40,7 @@ class PostDetail extends Component {
       photoIndex: 0,
       isOpen: false,
       qty: 1,
-      newImage: props.product.media[0].url,
+      newImage:props?.product.medias? props?.product?.medias[0].url:'',
     };
   }
 
@@ -268,7 +268,7 @@ class PostDetail extends Component {
     const { photoIndex, isOpen } = this.state;
     const qty = this.state.qty;
     const { product } = this.props;
-    const images = [product.media[0].url, product.media[0].url];
+    // const images = [product.medias[0].url, product.medias[0].url];
     // product.pictures.map((pic) => images.push(pic));
 
     let rat = [];
@@ -297,10 +297,17 @@ class PostDetail extends Component {
                         className="ciyashop-product-gallery__wrapper popup-gallery"
                       >
                         <div className="ciyashop-product-gallery__image">
-                          <img
-                            src={product?.media[0]?.url}
-                            className="img-fluid"
-                          />
+                        {product?.medias ? (
+                          <div className="product-thumbnail-main">
+                            <img
+                              src={`${product?.medias[0]?.url}`}
+                              className="img-fluid"
+                              alt="shop"
+                            />
+                          </div>
+                        ) : (
+                          <img src="shop" className="img-fluid" alt="shop" />
+                        )}
                         </div>
                       </Slider>
                       <div className="ciyashop-product-gallery_buttons_wrapper">
@@ -343,9 +350,7 @@ class PostDetail extends Component {
             <div className="product-top-right col-xl-7 col-md-6">
               <div className="product-top-right-inner">
                 <div className="summary entry-summary">
-                  <h1 className="product_title entry-title">
-                    {product.name.en}
-                  </h1>
+                  <h1 className="product_title entry-title">{product.code}</h1>
                   {/* <div className="product-rating">
                     <div className="star-rating">{rat}</div>
                     <p className="review-link mt-2">
@@ -359,7 +364,7 @@ class PostDetail extends Component {
                   })}`}</p> */}
                   <div className="product-details__short-description">
                     <div className="pdp-about-details-txt pdp-about-details-equit">
-                      {product.description.en}
+                      {product.code}
                     </div>
                   </div>
                   <form className="cart">

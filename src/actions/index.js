@@ -7,12 +7,12 @@ export const receiveProducts = (categoryData) => {
   return (dispatch) => {
     const productdata = ProductsList;
 
-    return get("getAllProducts")
+    return get("getAlgoliaProducts")
       .then((response) => {
-        console.log("GET PRODUCT", response.data);
+        console.log("GET PRODUCT", response.data.hits);
         if (response.status == 200) {
           // let data = response.data.data.filter((info) => info.status == "live");
-          let products = response.data
+          let products = response.data.hits
 
           // data.map((info) => {
           //   let category = [];

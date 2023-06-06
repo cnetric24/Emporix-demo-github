@@ -20,6 +20,8 @@ class ProductList extends Component {
     };
   }
 
+  
+
   AddToCart(ProductID, ProductName, ProductImage, Qty, Rate, StockStatus, Sku) {
     var Cart = JSON.parse(localStorage.getItem("LocalCartItems"));
     if (Cart == null) Cart = new Array();
@@ -151,18 +153,18 @@ class ProductList extends Component {
             <div className="product-thumbnail">
               <div className="product-thumbnail-inner">
                 <Link to={`/shop/${product?.id}`}>
-                  {product?.media[0]?.url ? (
+                  {product?.medias? (
                     <div className="product-thumbnail-main">
                       <img
-                        src={`${product?.media[0]?.url}`}
+                        src={`${product?.medias[0]?.url}`}
                         className="img-fluid"
                       />
                     </div>
                   ) : null}
-                  {product?.media[0]?.url ? (
+                  {product?.media? (
                     <div className="product-thumbnail-swap">
                       <img
-                        src={`${product?.media[0]?.url}`}
+                        src={`${product?.medias[0]?.url}`}
                         className="img-fluid"
                       />
                     </div>
@@ -175,20 +177,21 @@ class ProductList extends Component {
                   <div className="product-action product-action-add-to-cart">
                     {!this.CheckCardItem(product.id) ? (
                       <Link
-                        onClick={() =>
-                          {if(this.props.customerID){
-                          this.AddToCart(
-                            product?.id,
-                            product?.name.en,
-                            product?.media[0]?.url,
-                            1,
-                            this.getProductPrice(product.id),
-                            "In Stock",
-                            product.id
-                          )} else{
+                        onClick={() => {
+                          if (this.props.customerID) {
+                            this.AddToCart(
+                              product?.id,
+                              product?.name.en,
+                              product?.medias[0]?.url,
+                              1,
+                              this.getProductPrice(product.id),
+                              "In Stock",
+                              product.id
+                            );
+                          } else {
                             toast.error("Please Login...");
-                          }}
-                        }
+                          }
+                        }}
                         className="button add_to_cart_button"
                         rel="nofollow"
                       >
@@ -252,9 +255,9 @@ class ProductList extends Component {
                   ))}
                 </span>
               ) : null} */}
-              {product.name ? (
+              {product.code ? (
                 <h3 className="product-name">
-                  <Link to={`/shop/${product.id}`}>{product.name.en}</Link>
+                  <Link to={`/shop/${product.id}`}>{product.code}</Link>
                 </h3>
               ) : null}
               <div className="product-rating-price">
@@ -278,7 +281,8 @@ class ProductList extends Component {
                       {/* {product.salePrice.toLocaleString(navigator.language, {
                           minimumFractionDigits: 0,
                         })} */}{" "}
-                      {this.getProductPrice(product.id)}
+                          {product?.prices &&product.prices[0]?.originalAmount}
+                      {/* {this.getProductPrice(product.id)} */}
                     </span>
                   </ins>
                 </span>

@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { Col, Container, Row } from "reactstrap";
 
-import { getFilterProductsdata } from "../../services";
+// import { getFilterProductsdata } from "../../services";
 import ProductList from "../../widgets/ProductList";
 import ShopBanner from "../../widgets/shopfilter/ShopBanner";
 import SideFilter from "../../widgets/shopfilter/SideFilter";
@@ -22,6 +22,7 @@ class ShopPage extends Component {
       hasMoreProduct: true,
       getproduct: [],
       searchValue: "",
+      ss: this.props.products,
     };
   }
   componentWillMount() {
@@ -32,6 +33,34 @@ class ShopPage extends Component {
     //     });
     //   }, 2500);
     // }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.searchValue !== this.state.searchValue) {
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+      myHeaders.append("X-Algolia-API-Key", "9eb2ec7ff1e5ae226bb793c220b16382");
+      myHeaders.append("X-Algolia-Application-Id", "XRZ5HVGA1E");
+
+      var raw = "";
+
+      var requestOptions = {
+        method: "GET",
+        headers: myHeaders,
+        redirect: "follow",
+      };
+
+      fetch(
+        `http://13.126.66.2:1899/algoliaSearch/${this.state.searchValue}/10`,
+        requestOptions
+      )
+        .then((response) => response.json())
+        .then(
+          (result) => this.setState({ ...this.state, ss: result.hits }),
+         
+        )
+        .catch((error) => console.log("error", error));
+    }
   }
 
   onLoadMore = () => {
@@ -67,9 +96,10 @@ class ShopPage extends Component {
       layoutstyle = localStorage.setItem("setLayoutStyle", "col-sm-6 col-md-4");
     }
 
-    const searchResults = products?.filter((eachUser) =>
-      eachUser?.name.en.toLowerCase().includes(this.state.searchValue)
-    );
+    // const searchResults = products?.filter((eachUser) =>
+    //   eachUser?.code.toLowerCase().includes(this.state.searchValue)
+    // );
+    const searchResults =this.state.ss || products
 
     return (
       <div className="site-content">

@@ -21,7 +21,7 @@ class TopSellingProduct extends Component {
 
   AddToCart(ProductID, ProductName, ProductImage, Qty, Rate, StockStatus, Sku) {
     var Cart = JSON.parse(localStorage.getItem("LocalCartItems"));
-    
+
     if (Cart == null) Cart = new Array();
     let selectedProduct = Cart.find(
       (product) => product.ProductID === ProductID
@@ -53,7 +53,7 @@ class TopSellingProduct extends Component {
     } else {
       toast.warning("Item is already in Cart");
     }
-    console.log("this is stipe",Cart)
+    console.log("this is stipe", Cart);
   }
 
   AddToWishList(
@@ -144,25 +144,30 @@ class TopSellingProduct extends Component {
   }
 
   render() {
+    console.log("final testing...", this.props.products[10]);
     return (
       <Row className="products products-loop grid ciyashop-products-shortcode">
         <ToastContainer autoClose={1000} />
 
-        {this.props.products.map((product, index) =>
-          index < 14 ? (
+        {this.props?.products?.map((product, index) =>
+          index < 20 ? (
             <Col sm={6} lg={3}>
               <div className="product product_tag-black product-hover-style-default product-hover-button-style-dark product_title_type-single_line product_icon_type-line-icon">
                 <div className="product-inner element-hovered">
                   <div className="product-thumbnail">
                     <div className="product-thumbnail-inner">
                       <Link to={`/shop/${product?.id}`}>
-                        <div className="product-thumbnail-main">
-                          <img
-                            src={`${product?.media[0]?.url}`}
-                            className="img-fluid"
-                            alt="shop"
-                          />
-                        </div>
+                        {product?.medias ? (
+                          <div className="product-thumbnail-main">
+                            <img
+                              src={`${product?.medias[0]?.url}`}
+                              className="img-fluid"
+                              alt="shop"
+                            />
+                          </div>
+                        ) : (
+                          <img src="shop" className="img-fluid" alt="shop" />
+                        )}
                         {/* <div className="product-thumbnail-swap">
                           <img
                             src={`${product.pictures[1]}`}
@@ -177,23 +182,21 @@ class TopSellingProduct extends Component {
                         <div className="product-action product-action-add-to-cart">
                           {!this.CheckCardItem(product.id) ? (
                             <Link
-                              onClick={() => {if(this.props.customerID){
-                                this.AddToCart(
-                                  product?.id,
-                                  product?.name.en,
-                                  product?.media[0]?.url,
-                                  1,
-                                  this.getProductPrice(product?.id),
-                                  "In Stock",
-                                  product?.id
-                                )
-                                
-                              }
-                            else{
-                              toast.error("Please Login...");
-                            }}
-                                
-                              }
+                              onClick={() => {
+                                if (this.props.customerID) {
+                                  this.AddToCart(
+                                    product?.id[(0, 23)],
+                                    product?.code,
+                                    product?.medias[0]?.url,
+                                    1,
+                                    this.getProductPrice(product?.id[(0, 23)]),
+                                    "In Stock",
+                                    product?.id
+                                  );
+                                } else {
+                                  toast.error("Please Login...");
+                                }
+                              }}
                               className="button add_to_cart_button"
                               rel="nofollow"
                             >
@@ -251,17 +254,16 @@ class TopSellingProduct extends Component {
                       {/* {product.category} */}
                     </span>
                     <h3 className="product-name">
-                      <Link to={`/shop/${product?.id}`}>
-                        {product?.name.en}{" "}
-                      </Link>
+                      <Link to={`/shop/${product?.id}`}>{product?.code} </Link>
                     </h3>
                     <div className="product-rating-price">
                       <span className="price">
                         <ins>
                           <span className="price-amount amount">
                             <span className="currency-symbol">$</span>
+                            {product?.prices &&product.prices[0]?.originalAmount}
 
-                            {this.getProductPrice(product?.id)|| ""}
+                            {/* {this.getProductPrice(product?.id) || ""} */}
                           </span>
                         </ins>
                       </span>

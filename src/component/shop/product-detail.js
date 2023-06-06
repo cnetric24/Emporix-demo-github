@@ -154,7 +154,7 @@ class ProductDetail extends Component {
                         <span>{Productedit.category}</span>
                       </li> */}
                       <li>
-                        <span>{Productedit.name.en}</span>
+                        <span>{Productedit.code}</span>
                       </li>
                     </ul>
                   </div>
@@ -209,7 +209,7 @@ class ProductDetail extends Component {
                         aria-labelledby="home-tab"
                       >
                         {/* <h2>What is Lorem Ipsum?</h2> */}
-                        <p className="mt-2">{Productedit.description.en}</p>
+                        {/* <p className="mt-2">{Productedit.description.en}</p> */}
 
                         <div className="product-info-box border-top border-bottom mt-5  pt-4 pt-lg-0 pb-2 pb-sm-0">
                           <Row>
