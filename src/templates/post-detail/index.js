@@ -405,7 +405,7 @@ class PostDetail extends Component {
                               product.name.en,
                               product.media[0].url,
                               1,
-                              this.getProductPrice(product.id),
+                              product.prices[0]?.originalAmount,
                               "In Stock",
                               product.id
                             );

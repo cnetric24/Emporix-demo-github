@@ -185,11 +185,11 @@ class TopSellingProduct extends Component {
                               onClick={() => {
                                 if (this.props.customerID) {
                                   this.AddToCart(
-                                    product?.id[(0, 23)],
+                                    product?.id,
                                     product?.code,
                                     product?.medias[0]?.url,
                                     1,
-                                    this.getProductPrice(product?.id[(0, 23)]),
+                                    product.prices[0]?.originalAmount,
                                     "In Stock",
                                     product?.id
                                   );

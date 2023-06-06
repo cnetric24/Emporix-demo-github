@@ -184,7 +184,7 @@ class ProductList extends Component {
                               product?.name.en,
                               product?.medias[0]?.url,
                               1,
-                              this.getProductPrice(product.id),
+                              product.prices[0]?.originalAmount,
                               "In Stock",
                               product.id
                             );
