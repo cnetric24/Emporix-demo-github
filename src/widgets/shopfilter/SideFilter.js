@@ -21,6 +21,7 @@ import { Scrollbars } from "react-custom-scrollbars";
 import { bindActionCreators } from "redux";
 import { getSearchProduct } from "../../actions/Search";
 import debounce from "lodash.debounce";
+import { receiveProducts } from "../../actions";
 class SideFilter extends Component {
   searchTextchangeFunc = undefined;
   constructor(props) {
@@ -193,6 +194,11 @@ class SideFilter extends Component {
     var colors = [];
     this.props.colorValue(colors);
     this.props.onChange();
+    this.setState({ ...this.state, selectColor: "" });
+  // receiveProducts()
+  }
+  clearsizes() {
+    this.setState({ ...this.state, selectColor: "" });
   }
 
   // Clear Category Filter Code
@@ -254,7 +260,7 @@ class SideFilter extends Component {
             placeholder="Search a Product"
           />
         </div>
-       
+
         <div className="widget widget_layered_nav widget-layered-nav pgs_widget-layered-nav">
           <div className="d-flex align-items-center justify-content-between">
             <h4 className="widget-title">Filter by Color</h4>
@@ -278,56 +284,57 @@ class SideFilter extends Component {
                 tabIndex={0}
                 style={{ right: "-17px" }}
               >
-               
-                                 <div className="form-check pgs-filter-checkbox">
-                <input
-                  type="radio"
-                  id="red"
-                  value="red"
-                  onChange={this.handleChange}
-                  checked={this.state.selectColor === "red"}
-                />
-                <label className="form-check-label" htmlFor="red">
-                  Red
-                </label>
-              </div>
-              <div className="form-check pgs-filter-checkbox">
-                <input
-                  type="radio"
-                  id="Blue"
-                  value="Blue"
-                  onChange={this.handleChange}
-                  checked={this.state.selectColor === "Blue"}
-                />
-                <label className="form-check-label" htmlFor="Blue">
-                  Blue
-                </label>
-              </div>
-              <div className="form-check pgs-filter-checkbox">
-                <input
-                  type="radio"
-                  id="Black"
-                  value="Black"
-                  onChange={this.handleChange}
-                  checked={this.state.selectColor === "Black"}
-                />
-                <label className="form-check-label" htmlFor="Black">
-                  Black
-                </label>
-              </div>
+                <div className="form-check pgs-filter-checkbox">
+                  <input
+                    type="radio"
+                    id="red"
+                    value="red"
+                    onChange={this.handleChange}
+                    checked={this.state.selectColor === "red"}
+                  />
+                  <label className="form-check-label" htmlFor="red">
+                    Red
+                  </label>
+                </div>
+                <div className="form-check pgs-filter-checkbox">
+                  <input
+                    type="radio"
+                    id="Blue"
+                    value="Blue"
+                    onChange={this.handleChange}
+                    checked={this.state.selectColor === "Blue"}
+                  />
+                  <label className="form-check-label" htmlFor="Blue">
+                    Blue
+                  </label>
+                </div>
+                <div className="form-check pgs-filter-checkbox">
+                  <input
+                    type="radio"
+                    id="Black"
+                    value="Black"
+                    onChange={this.handleChange}
+                    checked={this.state.selectColor === "Black"}
+                  />
+                  <label className="form-check-label" htmlFor="Black">
+                    Black
+                  </label>
+                </div>
               </ul>
-             
             </Scrollbars>
           </div>
-          <div className="d-flex align-items-center justify-content-between"   style={{ marginTop: "-100px" }}>
+          <div
+            className="d-flex align-items-center justify-content-between"
+            style={{ marginTop: "-100px" }}
+          >
             <h4 className="widget-title">Filter by Size</h4>
             <p>
-              <a
+              {/* <a
                 className="price-clear-filter"
-                onClick={() => this.clearcolor()}
+                onClick={() => this.clearsizes()}
               >
                 Clear
-              </a>
+              </a> */}
             </p>
           </div>
 
@@ -341,76 +348,74 @@ class SideFilter extends Component {
                 tabIndex={0}
                 style={{ right: "-17px" }}
               >
-               
-                                 <div className="form-check pgs-filter-checkbox">
-                <input
-                  type="radio"
-                  id="small"
-                  value="small"
-                  onChange={this.handleChange}
-                  checked={this.state.selectColor === "small"}
-                />
-                <label className="form-check-label" htmlFor="small">
-                  Small
-                </label>
-              </div>
-              <div className="form-check pgs-filter-checkbox">
-                <input
-                  type="radio"
-                  id="medium"
-                  value="medium"
-                  onChange={this.handleChange}
-                  checked={this.state.selectColor === "medium"}
-                />
-                <label className="form-check-label" htmlFor="medium">
-                Medium
-                </label>
-              </div>
-              <div className="form-check pgs-filter-checkbox">
-                <input
-                  type="radio"
-                  id="large"
-                  value="large"
-                  onChange={this.handleChange}
-                  checked={this.state.selectColor === "large"}
-                />
-                <label className="form-check-label" htmlFor="large">
-                Large
-                </label>
-              </div>
+                <div className="form-check pgs-filter-checkbox">
+                  <input
+                    type="radio"
+                    id="small"
+                    value="small"
+                    onChange={this.handleChange}
+                    checked={this.state.selectColor === "small"}
+                  />
+                  <label className="form-check-label" htmlFor="small">
+                    Small
+                  </label>
+                </div>
+                <div className="form-check pgs-filter-checkbox">
+                  <input
+                    type="radio"
+                    id="medium"
+                    value="medium"
+                    onChange={this.handleChange}
+                    checked={this.state.selectColor === "medium"}
+                  />
+                  <label className="form-check-label" htmlFor="medium">
+                    Medium
+                  </label>
+                </div>
+                <div className="form-check pgs-filter-checkbox">
+                  <input
+                    type="radio"
+                    id="large"
+                    value="large"
+                    onChange={this.handleChange}
+                    checked={this.state.selectColor === "large"}
+                  />
+                  <label className="form-check-label" htmlFor="large">
+                    Large
+                  </label>
+                </div>
               </ul>
-             
             </Scrollbars>
           </div>
           <div className="widget widget_price_filter">
-          <div className="d-flex align-items-center justify-content-between">
-            <h4 className="widget-title">Filter by Price</h4>
-            <p>
-              <a
-                className="price-clear-filter"
-                onClick={() => this.clearprice(this.props.prices)}
-              >
-                Clear
-              </a>
-            </p>
-          </div>
-          <div classs="shop-filter shop-filter-product-price widget_price_filter">
-            <div className="shop-filter-wrapper">
-              <div className="price_slider_wrapper">
-                <Slider
-                  range
-                  step={1}
-                  min={0}
-                  max={100}
-                  tipFormatter={this.toolformatter}
-                  value={this.state.priceplace}
-                  onChange={this.onChangePricePlace}
-                  marks={marks}
-                />
+            <div className="d-flex align-items-center justify-content-between">
+              <h4 className="widget-title">Filter by Price</h4>
+              <p>
+                <a
+                  className="price-clear-filter"
+                  onClick={() => this.clearprice(this.props.prices)}
+                >
+                  Clear
+                </a>
+              </p>
+            </div>
+            <div classs="shop-filter shop-filter-product-price widget_price_filter">
+              <div className="shop-filter-wrapper">
+                <div className="price_slider_wrapper">
+                  <Slider
+                    range
+                    step={1}
+                    min={0}
+                    max={100}
+                    tipFormatter={this.toolformatter}
+                    value={this.state.priceplace}
+                    onChange={this.onChangePricePlace}
+                    marks={marks}
+                  />
+                </div>
               </div>
             </div>
           </div>
-        </div>
         </div>
         {/* <div className="widget widget_layered_nav widget-layered-nav pgs_widget-layered-nav">
           <div className="d-flex align-items-center justify-content-between">
