@@ -258,6 +258,58 @@ class SideFilter extends Component {
             placeholder="Search a Product"
           />
         </div>
+        <div
+            className="d-flex align-items-center justify-content-between"
+            style={{ marginTop: "-50px" }}
+          >
+            <h6 className="widget-title" style={{fontFize:'16px',fontWeight:'200px',marginBottom:'8px'}}>Categories</h6>
+            <p>
+              {/* <a
+                className="price-clear-filter"
+                onClick={() => this.clearsizes()}
+              >
+                Clear
+              </a> */}
+            </p>
+          </div>
+          <div
+            className="pgs-widget-layered-nav-list-container has-scrollbar"
+            style={{ height: "110px",marginBottom:'-150px',marginTop:'-10px' }}
+          >
+            <Scrollbars>
+              <ul
+                className="pgs-widget-layered-nav-list"
+                tabIndex={0}
+                style={{ right: "-17px" }}
+              >
+                <div className="form-check pgs-filter-checkbox">
+                  <input
+                    type="radio"
+                    id="men"
+                    value="Men's T Shirts"
+                    onChange={this.handleChange}
+                    checked={this.state.selectColor === "Men's T Shirts"}
+                  />
+                  <label className="form-check-label" htmlFor="men">
+                    Men
+                  </label>
+                </div>
+                <div className="form-check pgs-filter-checkbox">
+                  <input
+                    type="radio"
+                    id="women"
+                    value="Women's Tops"
+                    onChange={this.handleChange}
+                    checked={this.state.selectColor === "Women's Tops"}
+                  />
+                  <label className="form-check-label" htmlFor="women">
+                    Women
+                  </label>
+                </div>
+               
+              </ul>
+            </Scrollbars>
+          </div>
 
         <div className="widget widget_layered_nav widget-layered-nav pgs_widget-layered-nav">
           <div className="d-flex align-items-center justify-content-between">
