@@ -363,7 +363,7 @@ class SideFilter extends Component {
                   checked={this.state.selectColor === "medium"}
                 />
                 <label className="form-check-label" htmlFor="medium">
-                medium
+                Medium
                 </label>
               </div>
               <div className="form-check pgs-filter-checkbox">
@@ -375,7 +375,7 @@ class SideFilter extends Component {
                   checked={this.state.selectColor === "large"}
                 />
                 <label className="form-check-label" htmlFor="large">
-                large
+                Large
                 </label>
               </div>
               </ul>
