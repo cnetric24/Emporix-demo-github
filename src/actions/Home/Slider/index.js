@@ -52,7 +52,7 @@ export const checkout111111 = () => {
         each.ProductName
       ),
       urlencoded.append(
-        `line_items[${index}][price_data][product_data][images][${index}]`,
+        `line_items[${index}][price_data][product_data][images][0]`,
         each.ProductImage
       ),
       urlencoded.append(
@@ -60,7 +60,7 @@ export const checkout111111 = () => {
         each.Rate + "10"
       ),
       urlencoded.append(`line_items[${index}][quantity]`, each.Qty.toString()),
-      urlencoded.append(`payment_method_types[${index}]`, "card"),
+     
       urlencoded.append(
         `shipping_options[${index}][shipping_rate_data][display_name]`,
         "BlueDart"
@@ -107,6 +107,7 @@ export const checkout111111 = () => {
   // urlencoded.append("line_items[1][price_data][unit_amount]", "2400");
   // urlencoded.append("line_items[1][quantity]", "3");
   urlencoded.append("mode", "payment");
+  urlencoded.append(`payment_method_types[0]`, "card");
   // urlencoded.append("payment_method_types[0]", "card");
   // urlencoded.append(
   //   "shipping_options[0][shipping_rate_data][display_name]",
