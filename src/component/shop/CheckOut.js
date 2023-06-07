@@ -1746,7 +1746,7 @@ class CheckOut extends Component {
                           </label>
                         </li>
 
-                        <li class="payment_method_paypal">
+                        {/* <li class="payment_method_paypal">
                           <input
                             id="payment_method_paypal"
                             type="radio"
@@ -1765,7 +1765,7 @@ class CheckOut extends Component {
                               alt="Cash on delivery"
                             />
                           </label>
-                        </li>
+                        </li> */}
                       </ul>
                       <div class="form-row place-order">
                         <div class="terms-and-conditions-wrapper">

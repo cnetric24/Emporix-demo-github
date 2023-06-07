@@ -402,8 +402,8 @@ class PostDetail extends Component {
                           if (this.props.customerID) {
                             this.AddToCart(
                               product.id,
-                              product.name.en,
-                              product.media[0].url,
+                              product.code,
+                              product.medias[0].url,
                               1,
                               product.prices[0]?.originalAmount,
                               "In Stock",

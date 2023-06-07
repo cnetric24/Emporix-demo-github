@@ -181,7 +181,7 @@ class ProductList extends Component {
                           if (this.props.customerID) {
                             this.AddToCart(
                               product?.id,
-                              product?.name.en,
+                              product?.code,
                               product?.medias[0]?.url,
                               1,
                               product.prices[0]?.originalAmount,
