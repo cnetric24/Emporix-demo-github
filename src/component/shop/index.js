@@ -23,6 +23,7 @@ class ShopPage extends Component {
       getproduct: [],
       searchValue: "",
       ss: this.props.products,
+      searchColor:''
     };
   }
   componentWillMount() {
@@ -36,7 +37,7 @@ class ShopPage extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.searchValue !== this.state.searchValue) {
+    if (prevState.searchValue !== this.state.searchValue ||prevState.searchColor !== this.state.searchColor ) {
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("X-Algolia-API-Key", "9eb2ec7ff1e5ae226bb793c220b16382");
@@ -51,7 +52,7 @@ class ShopPage extends Component {
       };
 
       fetch(
-        `http://13.126.66.2:1899/algoliaSearch/${this.state.searchValue}/10`,
+        `http://13.126.66.2:1899/algoliaSearch/${this.state.searchValue}${this.state.searchColor}/10`,
         requestOptions
       )
         .then((response) => response.json())
@@ -84,6 +85,11 @@ class ShopPage extends Component {
     // const searchResults = usersDetailsList.filter(eachUser =>
     //   eachUser.name.includes(e.target.value)
     // )
+  };
+  searchColors = (e) => {
+   console.log("This is now testing",e.target.value)
+    this.setState({ ...this.state, searchColor: e.target.value });
+    
   };
   refreshPage = () => {
     window.location.reload(false);
@@ -141,6 +147,9 @@ class ShopPage extends Component {
                     }}
                     Test={(e) => {
                       this.searchValues(e);
+                    }}
+                    Test1={(e) => {
+                      this.searchColors(e);
                     }}
                   />
                   <SocialFilter />

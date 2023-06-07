@@ -30,27 +30,70 @@ export const checkout111111 = () => {
   );
 
   var urlencoded = new URLSearchParams();
-  urlencoded.append("cancel_url", "http://emporixdemo.universalcommerce.io:3020/Error");
+  urlencoded.append(
+    "cancel_url",
+    "http://emporixdemo.universalcommerce.io:3020/Error"
+  );
   urlencoded.append(
     "success_url",
     "http://emporixdemo.universalcommerce.io:3020/Success"
   );
   urlencoded.append("customer_email", custEmail);
-  urlencoded.append("line_items[0][price_data][currency]", "usd");
-  urlencoded.append(
-    "line_items[0][price_data][product_data][name]",
-    Cart[0].ProductName
-  );
-  urlencoded.append(
-    "line_items[0][price_data][product_data][description]",
-    Cart[0].ProductName
-  );
-  urlencoded.append(
-    "line_items[0][price_data][product_data][images][0]",
-    Cart[0].ProductImage
-  );
-  urlencoded.append("line_items[0][price_data][unit_amount]", "100");
-  urlencoded.append("line_items[0][quantity]", "1");
+
+  Cart.forEach((each, index) => {
+    return (
+      urlencoded.append(`line_items[${index}][price_data][currency]`, "usd"),
+      urlencoded.append(
+        `line_items[${index}][price_data][product_data][name]`,
+        each.ProductName
+      ),
+      urlencoded.append(
+        `line_items[${index}][price_data][product_data][description]`,
+        each.ProductName
+      ),
+      urlencoded.append(
+        `line_items[${index}][price_data][product_data][images][${index}]`,
+        each.ProductImage
+      ),
+      urlencoded.append(
+        `line_items[${index}][price_data][unit_amount]`,
+        each.Rate + "10"
+      ),
+      urlencoded.append(`line_items[${index}][quantity]`, each.Qty.toString()),
+      urlencoded.append(`payment_method_types[${index}]`, "card"),
+      urlencoded.append(
+        `shipping_options[${index}][shipping_rate_data][display_name]`,
+        "BlueDart"
+      ),
+      urlencoded.append(
+        `shipping_options[${index}][shipping_rate_data][fixed_amount][amount]`,
+        "1000"
+      ),
+      urlencoded.append(
+        `shipping_options[${index}][shipping_rate_data][fixed_amount][currency]`,
+        "usd"
+      ),
+      urlencoded.append(
+        `shipping_options[${index}][shipping_rate_data][type]`,
+        "fixed_amount"
+      )
+    );
+  });
+  // urlencoded.append("line_items[0][price_data][currency]", "usd");
+  // urlencoded.append(
+  //   "line_items[0][price_data][product_data][name]",
+  //   Cart[0].ProductName
+  // );
+  // urlencoded.append(
+  //   "line_items[0][price_data][product_data][description]",
+  //   Cart[0].ProductName
+  // );
+  // urlencoded.append(
+  //   "line_items[0][price_data][product_data][images][0]",
+  //   Cart[0].ProductImage
+  // );
+  // urlencoded.append("line_items[0][price_data][unit_amount]",   Cart[0].Rate+'10');
+  // urlencoded.append("line_items[0][quantity]",(Cart[0].Qty).toString());
   // urlencoded.append("line_items[1][price_data][currency]", "usd");
   // urlencoded.append("line_items[1][price_data][product_data][name]", "Pant");
   // urlencoded.append(
@@ -64,23 +107,23 @@ export const checkout111111 = () => {
   // urlencoded.append("line_items[1][price_data][unit_amount]", "2400");
   // urlencoded.append("line_items[1][quantity]", "3");
   urlencoded.append("mode", "payment");
-  urlencoded.append("payment_method_types[0]", "card");
-  urlencoded.append(
-    "shipping_options[0][shipping_rate_data][display_name]",
-    "BlueDart"
-  );
-  urlencoded.append(
-    "shipping_options[0][shipping_rate_data][fixed_amount][amount]",
-    "1000"
-  );
-  urlencoded.append(
-    "shipping_options[0][shipping_rate_data][fixed_amount][currency]",
-    "usd"
-  );
-  urlencoded.append(
-    "shipping_options[0][shipping_rate_data][type]",
-    "fixed_amount"
-  );
+  // urlencoded.append("payment_method_types[0]", "card");
+  // urlencoded.append(
+  //   "shipping_options[0][shipping_rate_data][display_name]",
+  //   "BlueDart"
+  // );
+  // urlencoded.append(
+  //   "shipping_options[0][shipping_rate_data][fixed_amount][amount]",
+  //   "1000"
+  // );
+  // urlencoded.append(
+  //   "shipping_options[0][shipping_rate_data][fixed_amount][currency]",
+  //   "usd"
+  // );
+  // urlencoded.append(
+  //   "shipping_options[0][shipping_rate_data][type]",
+  //   "fixed_amount"
+  // );
 
   var requestOptions = {
     method: "POST",
@@ -90,15 +133,15 @@ export const checkout111111 = () => {
   };
 
   fetch("https://api.stripe.com/v1/checkout/sessions", requestOptions)
-    .then((response) => 
-    // response.text()
-    response.json()
+    .then((response) =>
+      // response.text()
+      response.json()
     )
     .then((result) => {
       if (result) {
         // console.log("stripe responce", result.url);
         localStorage.removeItem("LocalCartItems");
-         window.location.replace(result.url)
+        window.location.replace(result.url);
       }
     })
     .catch((error) => console.log("error", error));
