@@ -21,7 +21,6 @@ import { Scrollbars } from "react-custom-scrollbars";
 import { bindActionCreators } from "redux";
 import { getSearchProduct } from "../../actions/Search";
 import debounce from "lodash.debounce";
-import { receiveProducts } from "../../actions";
 class SideFilter extends Component {
   searchTextchangeFunc = undefined;
   constructor(props) {
@@ -195,7 +194,6 @@ class SideFilter extends Component {
     this.props.colorValue(colors);
     this.props.onChange();
     this.setState({ ...this.state, selectColor: "" });
-  // receiveProducts()
   }
   clearsizes() {
     this.setState({ ...this.state, selectColor: "" });
