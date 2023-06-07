@@ -375,7 +375,7 @@ class SideFilter extends Component {
                   checked={this.state.selectColor === "large"}
                 />
                 <label className="form-check-label" htmlFor="large">
-                Large
+                large
                 </label>
               </div>
               </ul>
