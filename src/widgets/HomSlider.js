@@ -101,7 +101,7 @@ class HomSlider extends Component {
             <div key={2} className="slide-01-item">
               <div className="slide-inner">
                 <div className="slide-image">
-                  <img src={`${info?.url}`} alt="slide-1" width={1920} height={450}/>
+                  <img src={`${info?.url}`} alt="slide-1" width={1920} height={500}/>
                 </div>
                 <div className="slide-content">
                   <div class="container">

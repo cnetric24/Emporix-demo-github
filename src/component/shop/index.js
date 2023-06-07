@@ -94,6 +94,10 @@ class ShopPage extends Component {
   refreshPage = () => {
     window.location.reload(false);
   };
+
+  clearTest=()=>{
+    this.setState({ ...this.state, ss:this.props.products  });
+  }
   render() {
     let { products } = this.props;
     let layoutstyle = localStorage.getItem("setLayoutStyle");
@@ -151,6 +155,7 @@ class ShopPage extends Component {
                     Test1={(e) => {
                       this.searchColors(e);
                     }}
+                    ClearTest={()=>{this.clearTest()}}
                   />
                   <SocialFilter />
                   {/* <ShopBanner /> */}

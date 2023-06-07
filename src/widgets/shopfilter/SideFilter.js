@@ -45,6 +45,29 @@ class SideFilter extends Component {
     this.nameInput.focus();
   }
 
+  // componentWillMount() {
+  // this.getCategories() 
+
+  // }
+
+  // getCategories() {
+  //   var myHeaders = new Headers();
+  //   myHeaders.append("Content-Type", "application/json");
+  //   myHeaders.append("X-Algolia-API-Key", "9eb2ec7ff1e5ae226bb793c220b16382");
+  //   myHeaders.append("X-Algolia-Application-Id", "XRZ5HVGA1E");
+
+  //   var requestOptions = {
+  //     method: "GET",
+  //     headers: myHeaders,
+  //     redirect: "follow",
+  //   };
+
+  //   fetch(`http://13.126.66.2:1899/getAllCategories`, requestOptions)
+  //     .then((response) => response.json())
+  //     .then((result) => console.log("get categories ", result))
+  //     .catch((error) => console.log("error", error));
+  // }
+
   handleChange = (event) => {
     console.log(event.target.value);
     this.props.Test1(event);
@@ -194,6 +217,7 @@ class SideFilter extends Component {
     this.props.colorValue(colors);
     this.props.onChange();
     this.setState({ ...this.state, selectColor: "" });
+    this.props.ClearTest();
   }
   clearsizes() {
     this.setState({ ...this.state, selectColor: "" });
@@ -237,7 +261,7 @@ class SideFilter extends Component {
     console.log("categoryFilterValues", categoryFilterValues);
     return (
       <div>
-        <div className="widget">
+        <div className="">
           <h4 className="widget-title">Search</h4>
           <input
             type="text"
@@ -258,68 +282,16 @@ class SideFilter extends Component {
             placeholder="Search a Product"
           />
         </div>
-        <div
-            className="d-flex align-items-center justify-content-between"
-            style={{ marginTop: "-50px" }}
-          >
-            <h6 className="widget-title" style={{fontFize:'16px',fontWeight:'200px',marginBottom:'8px'}}>Categories</h6>
-            <p>
-              {/* <a
-                className="price-clear-filter"
-                onClick={() => this.clearsizes()}
-              >
-                Clear
-              </a> */}
-            </p>
-          </div>
-          <div
-            className="pgs-widget-layered-nav-list-container has-scrollbar"
-            style={{ height: "110px",marginBottom:'-150px',marginTop:'-10px' }}
-          >
-            <Scrollbars>
-              <ul
-                className="pgs-widget-layered-nav-list"
-                tabIndex={0}
-                style={{ right: "-17px" }}
-              >
-                <div className="form-check pgs-filter-checkbox">
-                  <input
-                    type="radio"
-                    id="men"
-                    value="Men's T Shirts"
-                    onChange={this.handleChange}
-                    checked={this.state.selectColor === "Men's T Shirts"}
-                  />
-                  <label className="form-check-label" htmlFor="men">
-                    Men
-                  </label>
-                </div>
-                <div className="form-check pgs-filter-checkbox">
-                  <input
-                    type="radio"
-                    id="women"
-                    value="Women's Tops"
-                    onChange={this.handleChange}
-                    checked={this.state.selectColor === "Women's Tops"}
-                  />
-                  <label className="form-check-label" htmlFor="women">
-                    Women
-                  </label>
-                </div>
-               
-              </ul>
-            </Scrollbars>
-          </div>
 
-        <div className="widget widget_layered_nav widget-layered-nav pgs_widget-layered-nav">
+        <div className="widget widget_layered_nav widget-layered-nav pgs_widget-layered-nav" style={{marginTop:'10px'}}>
           <div className="d-flex align-items-center justify-content-between">
-            <h4 className="widget-title">Filter by Color</h4>
+            <h4 className="widget-title">Color</h4>
             <p>
               <a
                 className="price-clear-filter"
                 onClick={() => this.clearcolor()}
               >
-                Clear
+                Clear All
               </a>
             </p>
           </div>
@@ -377,7 +349,7 @@ class SideFilter extends Component {
             className="d-flex align-items-center justify-content-between"
             style={{ marginTop: "-100px" }}
           >
-            <h4 className="widget-title">Filter by Size</h4>
+            <h4 className="widget-title">Size</h4>
             <p>
               {/* <a
                 className="price-clear-filter"
@@ -437,7 +409,67 @@ class SideFilter extends Component {
               </ul>
             </Scrollbars>
           </div>
-          <div className="widget widget_price_filter">
+          <div
+            className="d-flex align-items-center justify-content-between"
+            style={{ marginTop: "-100px" }}
+          >
+            <p className="widget-title" style={{ fontWeight: "bold" }}>
+              Categories
+            </p>
+          </div>
+          <div
+            className="pgs-widget-layered-nav-list-container has-scrollbar"
+            style={{ height: "210px" }}
+          >
+            <Scrollbars>
+              <ul
+                className="pgs-widget-layered-nav-list"
+                tabIndex={0}
+                style={{ right: "-17px" }}
+              >
+                <div className="form-check pgs-filter-checkbox">
+                  <input
+                    type="radio"
+                    id="men"
+                    value="Men's T Shirts"
+                    onChange={this.handleChange}
+                    checked={this.state.selectColor === "Men's T Shirts"}
+                  />
+                  <label className="form-check-label" htmlFor="men">
+                    Men
+                  </label>
+                </div>
+                <div className="form-check pgs-filter-checkbox">
+                  <input
+                    type="radio"
+                    id="women"
+                    value="Women's Tops"
+                    onChange={this.handleChange}
+                    checked={this.state.selectColor === "Women's Tops"}
+                  />
+                  <label className="form-check-label" htmlFor="women">
+                    Women
+                  </label>
+                </div>
+                <div className="form-check pgs-filter-checkbox">
+                  <input
+                    type="radio"
+                    id="kids"
+                    value="kids"
+                    onChange={this.handleChange}
+                    checked={this.state.selectColor === "kids"}
+                  />
+                  <label className="form-check-label" htmlFor="kids">
+                    Kid's
+                  </label>
+                </div>
+              </ul>
+            </Scrollbars>
+          </div>
+          <div
+            className="widget widget_price_filter"
+            style={{ marginTop: "-100px" }}
+          >
             <div className="d-flex align-items-center justify-content-between">
               <h4 className="widget-title">Filter by Price</h4>
               <p>
