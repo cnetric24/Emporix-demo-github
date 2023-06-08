@@ -195,14 +195,15 @@ class TopFilter extends Component {
             <select
               name="orderby"
               className="orderby select2"
-              onChange={(e) => this.props.sortValue(e.target.value)}
+              // onChange={(e) => this.props.sortValue(e.target.value)}
+              onChange={(e)=>{this.props.highToLow(e)}}
               tabIndex={-1}
               aria-hidden="true"
             >
               <option value=" " selected="selected">
                 Default sorting
               </option>
-              <option value="NewProduct">Newest Items</option>
+              {/* <option value="NewProduct">Newest Items</option> */}
               <option value="Pricehigh">Price: High to Low</option>
               <option value="Pricelow">Price: Low to High</option>
             </select>
