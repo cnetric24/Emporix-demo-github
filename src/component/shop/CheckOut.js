@@ -301,12 +301,14 @@ class CheckOut extends Component {
 
   placeOrderCall() {
     console.log("getCheckoutParams", this.getCheckoutParams());
-    checkout111111()
+    
     this.setState({ orderProcess: true });
     placeOrder(this.getCheckoutParams()).then((response) => {
       console.log("CHECKOUT RESPOSE", response);
-      this.tests();
+   
       if (response) {
+        this.tests();
+        checkout111111()
         localStorage.setItem(
           "FinalCheckoutCartItems",
           localStorage.getItem("LocalCartItems")
