@@ -427,7 +427,7 @@ class SideFilter extends Component {
               <div className="card-body">
                 <div
                   className="pgs-widget-layered-nav-list-container has-scrollbar"
-                  style={{ height: "210px", marginBottom: "-100px" }}
+                  style={{ height: "210px", marginBottom: "-80px" }}
                 >
                   <Scrollbars>
                     <ul
@@ -469,6 +469,18 @@ class SideFilter extends Component {
                         />
                         <label className="form-check-label" htmlFor="Black">
                           Black
+                        </label>
+                      </div>
+                      <div className="form-check pgs-filter-checkbox">
+                        <input
+                          type="radio"
+                          id="white"
+                          value="white"
+                          onChange={this.handleChange}
+                          checked={this.state.selectColor === "White"}
+                        />
+                        <label className="form-check-label" htmlFor="White">
+                          White
                         </label>
                       </div>
                     </ul>
