@@ -20,6 +20,7 @@ import {
 import { Scrollbars } from "react-custom-scrollbars";
 import { bindActionCreators } from "redux";
 import { getSearchProduct } from "../../actions/Search";
+import { BiChevronDown, BiChevronUp } from "react-icons/bi";
 import debounce from "lodash.debounce";
 class SideFilter extends Component {
   searchTextchangeFunc = undefined;
@@ -32,6 +33,9 @@ class SideFilter extends Component {
       setfistprice: [this.props.prices.min, this.props.prices.max],
       sidebarmenu: false,
       selectColor: "",
+      colorStatus: false,
+      categoryStatus: false,
+      sizeStatus: false,
     };
     this.showfilter = this.showfilter.bind(this);
     this.searchTextchangeFunc = debounce(this.SearchTextchange, 400);
@@ -46,7 +50,7 @@ class SideFilter extends Component {
   }
 
   // componentWillMount() {
-  // this.getCategories() 
+  // this.getCategories()
 
   // }
 
@@ -216,7 +220,13 @@ class SideFilter extends Component {
     var colors = [];
     this.props.colorValue(colors);
     this.props.onChange();
-    this.setState({ ...this.state, selectColor: "" });
+    this.setState({
+      ...this.state,
+      selectColor: "",
+      colorStatus: false,
+      categoryStatus: false,
+      sizeStatus: false,
+    });
     this.props.ClearTest();
   }
   clearsizes() {
@@ -282,9 +292,284 @@ class SideFilter extends Component {
             placeholder="Search a Product"
           />
         </div>
+        <div className="d-flex align-items-center justify-content-between mt-2">
+          <h4 className="widget-title"></h4>
+          <p>
+            <a className="price-clear-filter" onClick={() => this.clearcolor()}>
+              Clear All
+            </a>
+          </p>
+        </div>
+        <div
+          className=""
+          id="accordionExample"
+          style={{ marginTop: "5px", backgroundColor: "white" }}
+        >
+          <div className="">
+            <div className="card-header" id="headingOne">
+              <h2 className="mb-0">
+                <button
+                  style={{ fontWeight: "bold" }}
+                  className="btn"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#collapseOne"
+                  aria-expanded="true"
+                  aria-controls="collapseOne"
+                  onClick={() => {
+                    this.setState({
+                      ...this.state,
+                      colorStatus: !this.state.colorStatus,
+                    });
+                  }}
+                >
+                  Categories{" "}
+                  {!this.state.colorStatus ? (
+                    <BiChevronDown size={20} />
+                  ) : (
+                    <BiChevronUp size={20} />
+                  )}
+                </button>
+              </h2>
+            </div>
+            <div
+              id="collapseOne"
+              className={"collapse" + (this.state.colorStatus ? "show" : "")}
+              aria-labelledby="headingOne"
+              data-parent="#accordionExample"
+            >
+              <div className="card-body">
+                <div
+                  className="pgs-widget-layered-nav-list-container has-scrollbar"
+                  style={{ height: "210px", marginBottom: "-100px" }}
+                >
+                  <Scrollbars>
+                    <ul
+                      className="pgs-widget-layered-nav-list"
+                      tabIndex={0}
+                      style={{ right: "-17px" }}
+                    >
+                      <div className="form-check pgs-filter-checkbox">
+                        <input
+                          type="radio"
+                          id="men"
+                          value="Men's T Shirts"
+                          onChange={this.handleChange}
+                          checked={this.state.selectColor === "Men's T Shirts"}
+                        />
+                        <label className="form-check-label" htmlFor="men">
+                          Men
+                        </label>
+                      </div>
+                      <div className="form-check pgs-filter-checkbox">
+                        <input
+                          type="radio"
+                          id="women"
+                          value="Women's Tops"
+                          onChange={this.handleChange}
+                          checked={this.state.selectColor === "Women's Tops"}
+                        />
+                        <label className="form-check-label" htmlFor="women">
+                          Women
+                        </label>
+                      </div>
+                      <div className="form-check pgs-filter-checkbox">
+                        <input
+                          type="radio"
+                          id="kids"
+                          value="kids"
+                          onChange={this.handleChange}
+                          checked={this.state.selectColor === "kids"}
+                        />
+                        <label className="form-check-label" htmlFor="kids">
+                          Kid's
+                        </label>
+                      </div>
+                    </ul>
+                  </Scrollbars>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="card">
+            <div className="card-header" id="headingTwo">
+              <h2 className="mb-0">
+                <button
+                  style={{ fontWeight: "bold" }}
+                  className="btn collapsed"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#collapseTwo"
+                  aria-expanded="false"
+                  aria-controls="collapseTwo"
+                  onClick={() => {
+                    this.setState({
+                      ...this.state,
+                      categoryStatus: !this.state.categoryStatus,
+                    });
+                  }}
+                >
+                  Color{" "}
+                  {!this.state.categoryStatus ? (
+                    <BiChevronDown size={20} />
+                  ) : (
+                    <BiChevronUp size={20} />
+                  )}
+                </button>
+              </h2>
+            </div>
+            <div
+              id="collapseTwo"
+              className={"collapse" + (this.state.categoryStatus ? "show" : "")}
+              aria-labelledby="headingTwo"
+              data-parent="#accordionExample"
+            >
+              <div className="card-body">
+                <div
+                  className="pgs-widget-layered-nav-list-container has-scrollbar"
+                  style={{ height: "210px", marginBottom: "-100px" }}
+                >
+                  <Scrollbars>
+                    <ul
+                      className="pgs-widget-layered-nav-list"
+                      tabIndex={0}
+                      style={{ right: "-17px" }}
+                    >
+                      <div className="form-check pgs-filter-checkbox">
+                        <input
+                          type="radio"
+                          id="red"
+                          value="red"
+                          onChange={this.handleChange}
+                          checked={this.state.selectColor === "red"}
+                        />
+                        <label className="form-check-label" htmlFor="red">
+                          Red
+                        </label>
+                      </div>
+                      <div className="form-check pgs-filter-checkbox">
+                        <input
+                          type="radio"
+                          id="Blue"
+                          value="Blue"
+                          onChange={this.handleChange}
+                          checked={this.state.selectColor === "Blue"}
+                        />
+                        <label className="form-check-label" htmlFor="Blue">
+                          Blue
+                        </label>
+                      </div>
+                      <div className="form-check pgs-filter-checkbox">
+                        <input
+                          type="radio"
+                          id="Black"
+                          value="Black"
+                          onChange={this.handleChange}
+                          checked={this.state.selectColor === "Black"}
+                        />
+                        <label className="form-check-label" htmlFor="Black">
+                          Black
+                        </label>
+                      </div>
+                    </ul>
+                  </Scrollbars>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="card">
+            <div className="card-header" id="headingThree">
+              <h2 className="mb-0">
+                <button
+                  style={{ fontWeight: "bold" }}
+                  className="btn collapsed"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#collapseThree"
+                  aria-expanded="false"
+                  aria-controls="collapseThree"
+                  onClick={() => {
+                    this.setState({
+                      ...this.state,
+                      sizeStatus: !this.state.sizeStatus,
+                    });
+                  }}
+                >
+                  Size{" "}
+                  {!this.state.sizeStatus ? (
+                    <BiChevronDown size={20} />
+                  ) : (
+                    <BiChevronUp size={20} />
+                  )}
+                </button>
+              </h2>
+            </div>
+            <div
+              id="collapseThree"
+              className={"collapse" + (this.state.sizeStatus ? "show" : "")}
+              aria-labelledby="headingThree"
+              data-parent="#accordionExample"
+            >
+              <div className="card-body">
+                <div
+                  className="pgs-widget-layered-nav-list-container has-scrollbar"
+                  style={{ height: "210px", marginBottom: "-100px" }}
+                >
+                  <Scrollbars>
+                    <ul
+                      className="pgs-widget-layered-nav-list"
+                      tabIndex={0}
+                      style={{ right: "-17px" }}
+                    >
+                      <div className="form-check pgs-filter-checkbox">
+                        <input
+                          type="radio"
+                          id="small"
+                          value="small"
+                          onChange={this.handleChange}
+                          checked={this.state.selectColor === "small"}
+                        />
+                        <label className="form-check-label" htmlFor="small">
+                          Small
+                        </label>
+                      </div>
+                      <div className="form-check pgs-filter-checkbox">
+                        <input
+                          type="radio"
+                          id="medium"
+                          value="medium"
+                          onChange={this.handleChange}
+                          checked={this.state.selectColor === "medium"}
+                        />
+                        <label className="form-check-label" htmlFor="medium">
+                          Medium
+                        </label>
+                      </div>
+                      <div className="form-check pgs-filter-checkbox">
+                        <input
+                          type="radio"
+                          id="large"
+                          value="large"
+                          onChange={this.handleChange}
+                          checked={this.state.selectColor === "large"}
+                        />
+                        <label className="form-check-label" htmlFor="large">
+                          Large
+                        </label>
+                      </div>
+                    </ul>
+                  </Scrollbars>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-        <div className="widget widget_layered_nav widget-layered-nav pgs_widget-layered-nav" style={{marginTop:'10px'}}>
-          <div className="d-flex align-items-center justify-content-between">
+        <div
+          className="widget widget_layered_nav widget-layered-nav pgs_widget-layered-nav"
+          style={{ marginTop: "110px" }}
+        >
+          {/* <div className="d-flex align-items-center justify-content-between">
             <h4 className="widget-title">Color</h4>
             <p>
               <a
@@ -351,12 +636,7 @@ class SideFilter extends Component {
           >
             <h4 className="widget-title">Size</h4>
             <p>
-              {/* <a
-                className="price-clear-filter"
-                onClick={() => this.clearsizes()}
-              >
-                Clear
-              </a> */}
+             
             </p>
           </div>
 
@@ -465,7 +745,7 @@ class SideFilter extends Component {
                 </div>
               </ul>
             </Scrollbars>
-          </div>
+          </div> */}
           <div
             className="widget widget_price_filter"
             style={{ marginTop: "-100px" }}
