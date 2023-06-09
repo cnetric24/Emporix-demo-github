@@ -477,9 +477,9 @@ class SideFilter extends Component {
                           id="white"
                           value="white"
                           onChange={this.handleChange}
-                          checked={this.state.selectColor === "White"}
+                          checked={this.state.selectColor === "white"}
                         />
-                        <label className="form-check-label" htmlFor="White">
+                        <label className="form-check-label" htmlFor="white">
                           White
                         </label>
                       </div>
