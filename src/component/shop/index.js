@@ -59,7 +59,14 @@ class ShopPage extends Component {
         requestOptions
       )
         .then((response) => response.json())
-        .then((result) => this.setState({ ...this.state, ss: result.hits }))
+        .then((result) =>
+          this.setState({
+            ...this.state,
+            searchValue: "",
+            searchColor: "",
+            ss: result.hits,
+          })
+        )
         .catch((error) => console.log("error", error));
     }
   }
@@ -95,7 +102,7 @@ class ShopPage extends Component {
   };
 
   clearTest = () => {
-    this.setState({ ...this.state, ss: this.props.products });
+    this.setState({ ...this.state, searchValue: "", ss: this.props.products });
   };
 
   highToLow(e) {

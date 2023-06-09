@@ -226,6 +226,7 @@ class SideFilter extends Component {
       colorStatus: false,
       categoryStatus: false,
       sizeStatus: false,
+      SearchValue:''
     });
     this.props.ClearTest();
   }
